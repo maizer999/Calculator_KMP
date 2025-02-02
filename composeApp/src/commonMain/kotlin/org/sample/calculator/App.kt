@@ -5,9 +5,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -15,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.painterResource
@@ -36,16 +40,20 @@ fun App() {
     ) }
     val operators     = remember { listOf("/" ,"*" ,"+" ,"-" ,"=") }
     val extraOperators = remember { listOf("AC" ,"+/-" ,"%") }
-    MaterialTheme {
+    MaterialTheme (colors = themeColors() ) {
     Column(Modifier.fillMaxWidth()){
+        Spacer(modifier = Modifier.height(1.dp))
         Text(
             text = "0" ,
             modifier = Modifier
                 .fillMaxWidth()
+                .padding( 10.dp)
                 .align(alignment = Alignment.End)
-                .padding(10.dp)
                 .background(color = Color.DarkGray),
-            style = TextStyle(fontSize = 45.sp)
+            style = TextStyle(fontSize = 70.sp) ,
+            textAlign = TextAlign.End ,
+            color = Color.White
+
         )
 
         buttons.forEach { rowButtons ->
@@ -62,7 +70,9 @@ fun App() {
                             )
                         }
                         operators.contains(item) -> {
-                            operatorButton( text = item ,
+                            operatorButton(
+                                modifier = Modifier.weight(1f),
+                                text = item ,
                                 onClick = { })
                         } else -> {
 
@@ -79,4 +89,23 @@ fun App() {
         }
     }
     }
+}
+
+@Composable
+fun themeColors(): Colors {
+    return Colors(
+        primary = Color.Gray,
+        primaryVariant = Color.DarkGray,
+        secondary = Color(red = 242, green = 163, blue = 60, alpha = 255),
+        secondaryVariant = Color.Yellow,
+        background = Color.Black,
+        surface = MaterialTheme.colors.surface,
+        error = MaterialTheme.colors.error,
+        onPrimary = MaterialTheme.colors.onPrimary,
+        onSecondary = MaterialTheme.colors.onSecondary,
+        onBackground = MaterialTheme.colors.onBackground,
+        onSurface = MaterialTheme.colors.onSurface,
+        onError = MaterialTheme.colors.onError,
+        isLight = MaterialTheme.colors.isLight
+    )
 }
