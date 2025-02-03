@@ -142,14 +142,12 @@ The `CalculatorState` is a data class that holds the state of the calculator. It
 ```kotlin
 data class CalculatorState(
     val firstOperand: String = "0",    // The first operand in the calculation
-    val secondOperand: String = "0",   // The second operand (no longer needed)
     val currentOperand: String = "0",  // The operand being worked on currently
     val currentOperation: String? = null // Current operation (e.g., +, -, *, /)
 )
 ```
 
 - **`firstOperand`**: Holds the first operand in the calculation.
-- **`secondOperand`**: This value is no longer needed in this context and can be safely removed, as the `CalculatorViewModel` handles operand storage.
 - **`currentOperand`**: The operand currently being entered or displayed on the calculator.
 - **`currentOperation`**: The operator currently selected (e.g., `+`, `-`, `*`, `/`).
 
